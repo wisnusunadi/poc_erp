@@ -77,38 +77,5 @@ class LoginController extends Controller
     public function authenticated()
     {
         return redirect('/meeting/hr');
-        // if (auth()->user()->divisi_id == 24) {
-        //     return redirect('/ppic');
-        // } else if (auth()->user()->divisi_id == 15) {
-        //     return redirect('/logistik/dashboard');
-        // } else if (auth()->user()->divisi_id == 3) {
-        //     return redirect('/manager-teknik');
-        // } else if (auth()->user()->divisi_id == 23) {
-        //     return redirect('/qc/dashboard');
-        // } else if (auth()->user()->divisi_id == 26 || auth()->user()->divisi_id == 8 || auth()->user()->divisi_id == 32) {
-        //     return redirect('/penjualan/dashboard');
-        // } else if (auth()->user()->divisi_id == 31 || auth()->user()->divisi_id == 13) {
-        //     return redirect('/gbj/dashboard');
-        // } else if (auth()->user()->divisi_id == 17) {
-        //     return redirect('/produksi/dashboard');
-        // } else if (auth()->user()->divisi_id == 12) {
-        //     return redirect('/gk/dashboard');
-        // } else if (auth()->user()->divisi_id == 9) {
-        //     return redirect('/dc/dashboard');
-        // } else if (auth()->user()->divisi_id == 2) {
-        //     return redirect('/direksi/dashboard');
-        // } else if (auth()->user()->divisi_id == 28) {
-        //     return redirect('/kesehatan/dashboard');
-        // } else if (auth()->user()->divisi_id == 22) {
-        //     return redirect('/lab/kalibrasi');
-        // } else if (auth()->user()->divisi_id == 16 || auth()->user()->divisi_id == 10) {
-        //     return redirect('/lab/dashboard');
-        // } else if (auth()->user()->divisi_id == 34) {
-        //     return redirect('/meeting/ruangan');
-        // } else if (auth()->user()->divisi_id == 14) {
-        //     return redirect('/administrator/dashboard');
-        // }
-
-        return redirect('/home');
     }
 }

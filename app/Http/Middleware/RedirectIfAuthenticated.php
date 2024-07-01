@@ -26,44 +26,6 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 return redirect('/meeting/hr');
-                // return redirect(RouteServiceProvider::HOME);
-                // if ($request->user()->hasRole("24")) {
-                //     return redirect('/ppic');
-                // } else if ($request->user()->hasRole("15")) {
-                //     return redirect('/logistik/dashboard');
-                // } else if ($request->user()->hasRole("3")) {
-                //     return redirect('/manager-teknik');
-                // } else if ($request->user()->hasRole("23")) {
-                //     return redirect('/qc/dashboard');
-                // } else if ($request->user()->hasRole("26") || $request->user()->hasRole("8")) {
-                //     return redirect('/penjualan/dashboard');
-                // } else if ($request->user()->hasRole("13")) {
-                //     return redirect('/gbj/dashboard');
-                // } else if ($request->user()->hasRole("17") || $request->user()->hasRole("35")) {
-                //     return redirect('/produksi/dashboard');
-                // } else if ($request->user()->hasRole("12")) {
-                //     return redirect('/gk/dashboard');
-                // } else if ($request->user()->hasRole("9")) {
-                //     return redirect('/dc/dashboard');
-                // } else if ($request->user()->hasRole("2")) {
-                //     return redirect('/direksi/dashboard');
-                // } else if ($request->user()->hasRole("31")) {
-                //     return redirect('/gbj/dashboard');
-                // } else if ($request->user()->hasRole("28")) {
-                //     return redirect()->route('kesehatan.dashboard');
-                // } else if ($request->user()->hasRole("34")) {
-                //     return redirect('/meeting/ruangan');
-                // } else if ($request->user()->hasRole("22")) {
-                //     return redirect('/lab/kalibrasi');
-                // } else if ($request->user()->hasRole("14")) {
-                //     return redirect('/administrator/dashboard');
-                // } else if ($request->user()->hasRole("20")) {
-                //     return redirect('/penjualan/lacak/show');
-                // } else if ($request->user()->hasRole("11")) {
-                //     return redirect('/gbmp/perakitan');
-                // } else if ($request->user()->hasRole("30")) {
-                //     return redirect('/meeting/hr');
-                // }
             }
         }
         return $next($request);
