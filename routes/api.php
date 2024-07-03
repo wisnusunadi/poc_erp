@@ -77,7 +77,7 @@ Route::prefix('/hr')->group(function () {
         });
     });
 });
-
+Route::get('karyawan_all', [App\Http\Controllers\kesehatan\KaryawanController::class, 'get_karyawan_all']);
 Route::namespace('v2')->group(__DIR__ . '/yogi/api.php');
 Route::namespace('inventory')->group(__DIR__ . '/inventory/api.php');
 // check connection
