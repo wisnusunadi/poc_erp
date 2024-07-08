@@ -3,12 +3,12 @@ import VueRouter from "vue-router";
 const routes = [
     {
         path: "/gbmp/perakitan",
-        component: () => import("./page/permintaanperakitan"),
+        component: () => import("./page/permintaanPerakitan"),
         name: "permintaanperakitan",
     },
     {
         path: "/gbmp/perakitan/:id",
-        component: () => import("./page/permintaanperakitan/detail"),
+        component: () => import("./page/permintaanPerakitan/detail"),
         name: "permintaan-perakitan-detail",
     },
     {

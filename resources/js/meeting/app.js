@@ -16,7 +16,7 @@ Vue.use(VueRouter);
 Vue.use(Vuetify);
 Vue.use(VueSweetalert2);
 Vue.component("vue-timepicker", VueTimepicker);
-Vue.component("data-table", require("./components/DataTable.vue").default);
+Vue.component("data-table", require("./components/Datatable.vue").default);
 Vue.use(plugins);
 
 const store = new Vuex.Store(storeData);
