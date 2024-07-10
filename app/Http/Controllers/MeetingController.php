@@ -515,12 +515,21 @@ class MeetingController extends Controller
 
                 if (count($obj->dokumentasi) > 0) {
                     for ($j = 0; $j < count($request->dokumentasi); $j++) {
-                        $original = $request->dokumentasi[$j]['file']->getClientOriginalName();
+                        $original               = $request->dokumentasi[$j]['file']->getClientOriginalName();
                         $randomCollectionName = Str::uuid()->toString();
                         $extension = $request->dokumentasi[$j]['file']->getClientOriginalExtension();
                         $file = $randomCollectionName . '.' . $extension;
-                        Storage::disk('ftp')->put($file, fopen($request->dokumentasi[$j]['file'], 'r+'));
+                        //FTP
+                        //Storage::disk('ftp')->put($file, fopen($request->dokumentasi[$j]['file'], 'r+'));
+                        ///GCP
+                        $storeFile = $request->dokumentasi[$j]['file']->storeAs("test", $file, "gcs");
+                        Storage::disk('gcs')->url($storeFile);
 
+                        // $file = $request->file('file');
+                        // $file_name = time() . '_' . $file->getClientOriginalName();
+                        // $storeFile = $file->storeAs("test", $file_name, "gcs");
+                        // $disk = Storage::disk('gcs');
+                        // $fetchFile = $disk->url($storeFile);
                         DokumenMeeting::create([
                             'meeting_id' => $obj->id,
                             'nama' => $file,
@@ -1364,7 +1373,11 @@ class MeetingController extends Controller
                 $randomCollectionName = Str::uuid()->toString();
                 $extension = $request->dokumentasi[$j]->getClientOriginalExtension();
                 $file = $randomCollectionName . '.' . $extension;
-                Storage::disk('ftp')->put($file, fopen($request->dokumentasi[$j], 'r+'));
+                //FTP
+                // Storage::disk('ftp')->put($file, fopen($request->dokumentasi[$j], 'r+'));
+                //GCS
+                $storeFile = $request->dokumentasi[$j]->storeAs("test", $file, "gcs");
+                Storage::disk('gcs')->url($storeFile);
 
                 DokumenMeeting::create([
                     'meeting_id' => $obj->id,
@@ -1398,20 +1411,27 @@ class MeetingController extends Controller
 
     public function show_dokumen_ftp(Request $request)
     {
+        //GCS
         $name = $request->name;
-        // Check if the file exists in the storage
-        if (Storage::disk('ftp')->exists($name)) {
-            $fileStream = Storage::disk('ftp')->readStream($name);
-            return response()->stream(function () use ($fileStream) {
-                fpassthru($fileStream);
-            }, 200, [
-                'Content-Type' => Storage::disk('ftp')->mimeType($name),
-                'Content-Disposition' => 'inline; filename="' . $name . '"',
-            ]);
-        } else {
-            // If the file doesn't exist, return an appropriate response
-            return response()->json(['error' => 'File not found.'], 404);
-        }
+        $filePath = '/test/' . $name; // Path to your file in GCS
+        // Stream the file directly using the configured GCS disk
+        return Storage::disk('gcs')->response($filePath);
+
+        //FTP
+        // $name = $request->name;
+        // // Check if the file exists in the storage
+        // if (Storage::disk('ftp')->exists($name)) {
+        //     $fileStream = Storage::disk('gcs')->readStream($name);
+        //     return response()->stream(function () use ($fileStream) {
+        //         fpassthru($fileStream);
+        //     }, 200, [
+        //         'Content-Type' => Storage::disk('ftp')->mimeType($name),
+        //         'Content-Disposition' => 'inline; filename="' . $name . '"',
+        //     ]);
+        // } else {
+        //     // If the file doesn't exist, return an appropriate response
+        //     return response()->json(['error' => 'File not found.'], 404);
+        // }
     }
 
     // public function upload_dokumen_ftp(Request $request)
